@@ -7,8 +7,9 @@ divisible by 7 but are not a multiple of 5, between 2000 and 3200
 sequence on a single line.
 
 Hints: Consider use range(#begin, #end) method
-
 '''
+
+#solution:
 
 def numbersSum():
     list = []
