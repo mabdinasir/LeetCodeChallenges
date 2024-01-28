@@ -50,4 +50,16 @@ class Square(Shape):
         return self.length*self.length
 
 aSquare= Square(3)
-print(aSquare.area())
+# print(aSquare.area())
+
+def throws():
+    return 5/0
+
+try:
+    throws()
+except ZeroDivisionError:
+    print("division by zero!")
+except Exception as err:
+    print('Caught an exception')
+finally:
+    print('In finally block for cleanup')
