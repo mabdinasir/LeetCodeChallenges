@@ -67,3 +67,15 @@ print(random.sample([i for i in range(1,1001) if i%5==0 and i%7==0], 5))
 
 import random
 print(random.randrange(7,16))
+
+# Question 84
+# Please write a program to shuffle and print the list [3,6,7,8].
+
+# Hints: Use shuffle() function to shuffle a list.
+
+# Solution:
+
+from random import shuffle
+li = [3,6,7,8]
+shuffle(li)
+print(li)
