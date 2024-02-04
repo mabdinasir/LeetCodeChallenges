@@ -25,3 +25,15 @@ Z[4] = 1
 Z = np.arange(10,50)
 print(Z)
 
+#### 8. Reverse a vector (first element becomes last) (★☆☆)
+Z = np.arange(50)
+Z = Z[::-1]
+print(Z)
+
+#### 9. Create a 3x3 matrix with values ranging from 0 to 8 (★☆☆)
+Z = np.arange(9).reshape(3, 3)
+print(Z)
+
+#### 10. Find indices of non-zero elements from [1,2,0,0,4,0] (★☆☆)
+nz = np.nonzero([1,2,0,0,4,0])
+print(nz)
