@@ -93,7 +93,84 @@ Z = np.diag(1+np.arange(4),k=-1)
 Z = np.zeros((8,8),dtype=int)
 Z[1::2,::2] = 1
 Z[::2,1::2] = 1
-print(Z)
+# print(Z)
 
 #### 20. Consider a (6,7,8) shape array, what is the index (x,y,z) of the 100th element? (★☆☆)
 # print(np.unravel_index(99,(6,7,8)))
+
+#### 21. Create a checkerboard 8x8 matrix using the tile function (★☆☆)
+Z = np.tile( np.array([[0,1],[1,0]]), (4,4))
+# print(Z)
+
+#### 22. Normalize a 5x5 random matrix (★☆☆)
+Z = np.random.random((5,5))
+Z = (Z - np.mean (Z)) / (np.std (Z))
+# print(Z)
+
+#### 23. Create a custom dtype that describes a color as four unsigned bytes (RGBA) (★☆☆)
+color = np.dtype([("r", np.ubyte),
+                    ("g", np.ubyte),
+                    ("b", np.ubyte),
+                    ("a", np.ubyte)])
+# print(color)
+
+#### 24. Multiply a 5x3 matrix by a 3x2 matrix (real matrix product) (★☆☆)
+Z = np.dot(np.ones((5,3)), np.ones((3,2)))
+# print(Z)
+
+# Alternative solution, in Python 3.5 and above
+Z = np.ones((5,3)) @ np.ones((3,2))
+# print(Z)
+
+#### 25. Given a 1D array, negate all elements which are between 3 and 8, in place. (★☆☆)
+
+Z = np.arange(11)
+Z[(3 < Z) & (Z < 8)] *= -1
+# print(Z)
+
+#### 26. What is the output of the following script? (★☆
+
+# print(sum(range(5),-1))
+from numpy import *
+# print(sum(range(5),-1))
+
+# print(sum(range(5),-1))
+from numpy import *
+# print(sum(range(5),-1))
+
+#### 27. Consider an integer vector Z, which of these expressions are legal? (★☆
+# Z**Z
+# 2 << Z >> 2
+# Z <- Z
+# 1j*Z
+# Z/1/1
+# Z<Z>Z
+
+# Z**Z
+# 2 << Z >> 2
+# Z <- Z
+# 1j*Z
+# Z/1/1
+# Z<Z>Z
+
+#### 28. What are the result of the following expressions? (★☆
+# np.array(0) / np.array(0)
+# np.array(0) // np.array(0)
+# np.array([np.nan]).astype(int).astype(float)
+
+# print(np.array(0) / np.array(0))
+# print(np.array(0) // np.array(0))
+# print(np.array([np.nan]).astype(int).astype(float))
+
+#### 29. How to round away from zero a float array ? (★☆☆)
+
+Z = np.random.uniform(-10,+10,10)
+# print(np.copysign(np.ceil(np.abs(Z)), Z))
+
+# More readable but less efficient
+# print(np.where(Z>0, np.ceil(Z), np.floor(Z)))
+
+#### 30. How to find common values between two arrays? (★☆☆)
+Z1 = np.random.randint(0,10,10)
+Z2 = np.random.randint(0,10,10)
+print(np.intersect1d(Z1,Z2))
