@@ -109,9 +109,9 @@ Z = (Z - np.mean (Z)) / (np.std (Z))
 
 #### 23. Create a custom dtype that describes a color as four unsigned bytes (RGBA) (★☆☆)
 color = np.dtype([("r", np.ubyte),
-                    ("g", np.ubyte),
-                    ("b", np.ubyte),
-                    ("a", np.ubyte)])
+                 ("g", np.ubyte),
+                 ("b", np.ubyte),
+                 ("a", np.ubyte)])
 # print(color)
 
 #### 24. Multiply a 5x3 matrix by a 3x2 matrix (real matrix product) (★☆☆)
@@ -163,7 +163,6 @@ from numpy import *
 # print(np.array([np.nan]).astype(int).astype(float))
 
 #### 29. How to round away from zero a float array ? (★☆☆)
-
 Z = np.random.uniform(-10,+10,10)
 # print(np.copysign(np.ceil(np.abs(Z)), Z))
 
@@ -173,4 +172,157 @@ Z = np.random.uniform(-10,+10,10)
 #### 30. How to find common values between two arrays? (★☆☆)
 Z1 = np.random.randint(0,10,10)
 Z2 = np.random.randint(0,10,10)
-print(np.intersect1d(Z1,Z2))
+# print(np.intersect1d(Z1,Z2))
+
+#### 31. How to ignore all numpy warnings (not recommended)? (★☆☆)
+
+# Suicide mode on
+defaults = np.seterr(all="ignore")
+Z = np.ones(1) / 0
+
+# Back to sanity
+_ = np.seterr(**defaults)
+
+# Equivalently with a context manager
+with np.errstate(all="ignore"):
+     np.arange(3) / 0
+
+#### 32. Is the following expressions true? (★☆☆)
+np.sqrt(-1) == np.emath.sqrt(-1)
+
+#### 33. How to get the dates of yesterday, today and tomorrow? (★☆☆)
+
+yesterday = np.datetime64('today') - np.timedelta64(1)
+today     = np.datetime64('today')
+tomorrow  = np.datetime64('today') + np.timedelta64(1)
+
+#### 34. How to get all the dates corresponding to the month of July 2016? (★★☆)
+
+Z = np.arange('2016-07', '2016-08', dtype='datetime64[D]')
+# print(Z)
+
+#### 35. How to compute ((A+B)*(-A/2)) in place (without copy)? (★★☆)
+
+A = np.ones(3)*1
+B = np.ones(3)*2
+np.add(A,B,out=B)
+np.divide(A,2,out=A)
+np.negative(A,out=A)
+np.multiply(A,B,out=A)
+
+#### 36. Extract the integer part of a random array of positive numbers using 4 different methods (★★☆)
+
+Z = np.random.uniform(0,10,10)
+
+# print(Z - Z%1)
+# print(Z // 1)
+# print(np.floor(Z))
+# print(Z.astype(int))
+# print(np.trunc(Z))
+
+#### 37. Create a 5x5 matrix with row values ranging from 0 to 4 (★★☆)
+
+Z = np.zeros((5,5))
+Z += np.arange(5)
+# print(Z)
+
+# without broadcasting
+Z = np.tile(np.arange(0, 5), (5,1))
+# print(Z)
+
+#### 38. Consider a generator function that generates 10 integers and use it to build an array (★☆☆)
+
+def generate():
+     for x in range(10):
+       yield x
+Z = np.fromiter(generate(),dtype=float,count=-1)
+# print(Z)
+
+#### 39. Create a vector of size 10 with values ranging from 0 to 1, both excluded (★★☆)
+
+Z = np.linspace(0,1,11,endpoint=False)[1:]
+# print(Z)
+
+#### 40. Create a random vector of size 10 and sort it (★★☆)
+
+Z = np.random.random(10)
+Z.sort()
+# print(Z)
+
+#### 41. How to sum a small array faster than np.sum? (★★☆)
+
+Z = np.arange(10)
+np.add.reduce(Z)
+
+#### 42. Consider two random array A and B, check if they are equal (★★☆)
+
+A = np.random.randint(0,2,5)
+B = np.random.randint(0,2,5)
+
+# Assuming identical shape of the arrays and a tolerance for the comparison of values
+equal = np.allclose(A,B)
+# print(equal)
+
+# Checking both the shape and the element values, no tolerance (values have to be exactly equal)
+equal = np.array_equal(A,B)
+print(equal)
+
+#### 43. Make an array immutable (read-only) (★★☆)
+
+Z = np.zeros(10)
+Z.flags.writeable = False
+Z[0] = 1
+
+#### 44. Consider a random 10x2 matrix representing cartesian coordinates, convert them to polar coordinates (★★☆)
+
+Z = np.random.random((10,2))
+X,Y = Z[:,0], Z[:,1]
+R = np.sqrt(X**2+Y**2)
+T = np.arctan2(Y,X)
+# print(R)
+# print(T)
+
+#### 45. Create random vector of size 10 and replace the maximum value by 0 (★★☆)
+
+Z = np.random.random(10)
+Z[Z.argmax()] = 0
+print(Z)
+
+#### 46. Create a structured array with `x` and `y` coordinates covering the [0,1]x[0,1] area (★★☆)
+
+Z = np.zeros((5,5), [('x',float),('y',float)])
+Z['x'], Z['y'] = np.meshgrid(np.linspace(0,1,5),
+np.linspace(0,1,5))
+print(Z)
+
+#### 47. Given two arrays, X and Y, construct the Cauchy matrix C (Cij =1/(xi - yj)) (★★☆)
+
+# Author: Evgeni Burovski
+
+X = np.arange(8)
+Y = X + 0.5
+C = 1.0 / np.subtract.outer(X, Y)
+print(np.linalg.det(C))
+
+#### 48. Print the minimum and maximum representable value for each numpy scalar type (★★☆)
+
+for dtype in [np.int8, np.int32, np.int64]:
+    print(np.iinfo(dtype).min)
+    print(np.iinfo(dtype).max)
+for dtype in [np.float32, np.float64]:
+    print(np.finfo(dtype).min)
+    print(np.finfo(dtype).max)
+    print(np.finfo(dtype).eps)
+
+#### 49. How to print all the values of an array? (★★☆)
+
+np.set_printoptions(threshold=float("inf"))
+Z = np.zeros((40,40))
+# print(Z)
+
+#### 50. How to find the closest value (to a given scalar) in a vector? (★★☆)
+
+Z = np.arange(100)
+v = np.random.uniform(0,100)
+index = (np.abs(Z-v)).argmin()
+# print(Z[index])
