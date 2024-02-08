@@ -109,9 +109,9 @@ Z = (Z - np.mean (Z)) / (np.std (Z))
 
 #### 23. Create a custom dtype that describes a color as four unsigned bytes (RGBA) (★☆☆)
 color = np.dtype([("r", np.ubyte),
-                 ("g", np.ubyte),
-                 ("b", np.ubyte),
-                 ("a", np.ubyte)])
+                    ("g", np.ubyte),
+                    ("b", np.ubyte),
+                    ("a", np.ubyte)])
 # print(color)
 
 #### 24. Multiply a 5x3 matrix by a 3x2 matrix (real matrix product) (★☆☆)
@@ -185,7 +185,7 @@ _ = np.seterr(**defaults)
 
 # Equivalently with a context manager
 with np.errstate(all="ignore"):
-     np.arange(3) / 0
+    np.arange(3) / 0
 
 #### 32. Is the following expressions true? (★☆☆)
 np.sqrt(-1) == np.emath.sqrt(-1)
@@ -233,8 +233,8 @@ Z = np.tile(np.arange(0, 5), (5,1))
 #### 38. Consider a generator function that generates 10 integers and use it to build an array (★☆☆)
 
 def generate():
-     for x in range(10):
-       yield x
+    for x in range(10):
+        yield x
 Z = np.fromiter(generate(),dtype=float,count=-1)
 # print(Z)
 
