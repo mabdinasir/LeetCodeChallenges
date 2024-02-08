@@ -188,7 +188,7 @@ with np.errstate(all="ignore"):
     np.arange(3) / 0
 
 #### 32. Is the following expressions true? (★☆☆)
-np.sqrt(-1) == np.emath.sqrt(-1)
+# np.sqrt(-1) == np.emath.sqrt(-1)
 
 #### 33. How to get the dates of yesterday, today and tomorrow? (★☆☆)
 
@@ -271,7 +271,7 @@ print(equal)
 
 Z = np.zeros(10)
 Z.flags.writeable = False
-Z[0] = 1
+# Z[0] = 1
 
 #### 44. Consider a random 10x2 matrix representing cartesian coordinates, convert them to polar coordinates (★★☆)
 
@@ -286,23 +286,21 @@ T = np.arctan2(Y,X)
 
 Z = np.random.random(10)
 Z[Z.argmax()] = 0
-print(Z)
+# print(Z)
 
 #### 46. Create a structured array with `x` and `y` coordinates covering the [0,1]x[0,1] area (★★☆)
 
 Z = np.zeros((5,5), [('x',float),('y',float)])
 Z['x'], Z['y'] = np.meshgrid(np.linspace(0,1,5),
 np.linspace(0,1,5))
-print(Z)
+# print(Z)
 
 #### 47. Given two arrays, X and Y, construct the Cauchy matrix C (Cij =1/(xi - yj)) (★★☆)
-
-# Author: Evgeni Burovski
 
 X = np.arange(8)
 Y = X + 0.5
 C = 1.0 / np.subtract.outer(X, Y)
-print(np.linalg.det(C))
+# print(np.linalg.det(C))
 
 #### 48. Print the minimum and maximum representable value for each numpy scalar type (★★☆)
 
@@ -325,4 +323,18 @@ Z = np.zeros((40,40))
 Z = np.arange(100)
 v = np.random.uniform(0,100)
 index = (np.abs(Z-v)).argmin()
-print(Z[index])
+# print(Z[index])
+
+#### 51. Create a structured array representing a position (x,y) and a color (r,g,b) (★★☆)
+Z = np.zeros(10, [ ('position', [ ('x', float, 1),
+                                ('y', float, 1)]),
+                                ('color',    [ ('r', float, 1),
+                                ('g', float, 1),
+                                ('b', float, 1)])])
+print(Z)
+
+#### 52. Consider a random vector with shape (100,2) representing coordinates, find point by point distances (★★☆)
+Z = np.random.random((10,2))
+X,Y = np.atleast_2d(Z[:,0], Z[:,1])
+D = np.sqrt( (X-X.T)**2 + (Y-Y.T)**2)
+print(D)
