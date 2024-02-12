@@ -39,3 +39,4 @@ class Solution(object):
 
 print(Solution().addBinary("11", "1")) # "100"
 print(Solution().addBinary("1010", "1011")) # "10101"
+print(Solution().addBinary("0", "0")) # "0"
