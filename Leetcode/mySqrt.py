@@ -32,3 +32,4 @@ class Solution(object):
 
 print(Solution().mySqrt(4)) # 2
 print(Solution().mySqrt(8)) # 2
+print(Solution().mySqrt(0)) # 0
