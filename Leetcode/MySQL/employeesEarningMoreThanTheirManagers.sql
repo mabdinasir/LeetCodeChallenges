@@ -37,7 +37,7 @@ Output:
 +----------+
 Explanation: Joe is the only employee who earns more than his manager.
 
-# Write your MySQL query statement below
+-- Write your MySQL query statement below
 
 SELECT e1.name AS Employee
 FROM Employee e1

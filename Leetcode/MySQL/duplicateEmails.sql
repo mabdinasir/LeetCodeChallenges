@@ -35,7 +35,8 @@ Output:
 +---------+
 Explanation: a@b.com is repeated two times.
 
-# Write your MySQL query statement below
+-- Write your MySQL query statement below
+
 SELECT email
 FROM Person
 GROUP BY email
