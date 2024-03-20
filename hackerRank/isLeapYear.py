@@ -13,7 +13,7 @@
 
 # Note that the code stub provided reads from STDIN and passes arguments to the is_leap function. It is only necessary to complete the is_leap function.
 
-def is_leap(year):
+def isLeap(year):
     leap = False
     if ( year % 4 == 0) and (year % 100 != 0):
         leap = True
@@ -24,4 +24,4 @@ def is_leap(year):
     return leap
 
 year = int(input("Enter the year: "))
-print(is_leap(year))
+print(isLeap(year))
